@@ -4,14 +4,44 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  actions: write
 concurrency:
   group: pages
   cancel-in-progress: true
 jobs:
+  enable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Allow GITHUB_TOKEN write for workflows
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method PUT "/repos/${{ github.repository }}/actions/permissions/workflow" \
+            -f default_workflow_permissions=write \
+            -F can_approve_pull_request_reviews=false || true
+      - name: Create or update Pages (workflow build)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          gh api --method POST "/repos/${{ github.repository }}/pages" \
+            -f build_type=workflow \
+            -f 'source[branch]=main' \
+            -f 'source[path]=/'
+          code=$?
+          if [ $code -ne 0 ]; then
+            gh api --method PUT "/repos/${{ github.repository }}/pages" \
+              -f build_type=workflow \
+              -f 'source[branch]=main' \
+              -f 'source[path]=/' || true
+          fi
   deploy:
+    needs: enable
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -19,6 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        continue-on-error: true
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
