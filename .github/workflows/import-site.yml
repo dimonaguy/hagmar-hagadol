@@ -15,7 +15,7 @@ jobs:
           ref: main
       - name: Download and extract site tarball
         env:
-          TARBALL_URL: https://PLACEHOLDER.trycloudflare.com/hagmar-hagadol-site.tgz
+          TARBALL_URL: https://adapted-tribes-dry-received.trycloudflare.com/hagmar-hagadol-site.tgz
         run: |
           set -euo pipefail
           curl -fsSL "$TARBALL_URL" -o /tmp/site.tgz
@@ -26,6 +26,9 @@ jobs:
           test -f index.html
           test -f app.js
           test -f game.json
+          test -f assets-data-0.js
+          # Keep import workflow itself
+          git checkout -- .github/workflows/import-site.yml || true
       - name: Commit imported site
         run: |
           set -euo pipefail
