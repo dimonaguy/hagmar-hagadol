@@ -1,0 +1,177 @@
+{
+  "gameSettings": {
+    "title": "הגמר הגדול: כוכב הריאליטי",
+    "creator": "By Netanel Hasson",
+    "initialState": {
+      "popularity": 50,
+      "alliances": 50,
+      "sanity": 80
+    }
+  },
+  "nodes": {
+    "node_start": {
+      "id": "node_start",
+      "title": "הטוויסט של ההפקה",
+      "description": "שבועיים לפני הגמר הגדול. אתה יושב בסלון הווילה כשהמנחה מכריז על כניסת דייר בהפתעה - האקסית המיתולוגית שלך, שבאה לסגור חשבון. המצלמות מתבייתות עליך.",
+      "options": [
+        {
+          "label": "זיוף רומנטי: לשחק אותה שהניצוץ חזר ולייצר להפקה 'שואומנס' (רומן טלוויזיוני) סוחט דמעות.",
+          "targetNode": "node_romance_path",
+          "overlay_image": "לב_שבור_מנייר.png",
+          "stateModifiers": {
+            "popularity": 20,
+            "alliances": -10,
+            "sanity": -20
+          }
+        },
+        {
+          "label": "מצב נבל (Villain): לתקוף אותה מול כולם, לחשוף סודות שלה ולהפוך לדמות שהקהל אוהב לשנוא.",
+          "targetNode": "node_villain_path",
+          "overlay_image": "מצלמת_אולפן.png",
+          "stateModifiers": {
+            "popularity": 10,
+            "alliances": -30,
+            "sanity": -10
+          }
+        },
+        {
+          "label": "משחק הקורבן: לרוץ לחדר האח הגדול, לבכות על הלחץ הנפשי ולבקש לפרוש.",
+          "targetNode": "node_victim_path",
+          "overlay_image": "דלת_האח_הגדול.png",
+          "stateModifiers": {
+            "popularity": -10,
+            "alliances": 20,
+            "sanity": 10
+          }
+        }
+      ],
+      "background": "assets/bg/bg_start_3way.jpg"
+    },
+    "node_romance_path": {
+      "id": "node_romance_path",
+      "title": "מלכודת הדבש",
+      "description": "הרומן המזויף עובד פנטסטי. אתם הזוג של העונה. אבל רגע לפני חצי הגמר, היא מציעה לך דיל סודי בארון הבגדים: 'בוא נתאם הדחות נגד החברים שלך כדי להבטיח ששנינו בגמר'.",
+      "options": [
+        {
+          "label": "לבגוד בחברים: להסכים לדיל ולהדיח את החבר הכי קרוב אליך בבית.",
+          "targetNode": "node_end_winner_hated",
+          "overlay_image": "סכין_בגב.png",
+          "stateModifiers": {
+            "popularity": -30,
+            "alliances": -40,
+            "sanity": -10
+          }
+        },
+        {
+          "label": "לחשוף הכל: לפוצץ את הדיל בשידור חי ולהודות שהכל היה משחק.",
+          "targetNode": "node_end_runner_up",
+          "overlay_image": "רמקול_זהב.png",
+          "stateModifiers": {
+            "popularity": 40,
+            "alliances": 10,
+            "sanity": 20
+          }
+        }
+      ],
+      "background": "assets/bg/bg_romance_2way.jpg"
+    },
+    "node_villain_path": {
+      "id": "node_villain_path",
+      "title": "הבית נגדך",
+      "description": "הפכת לנבל הרשמי של העונה. הרייטינג בשמיים, אבל הדיירים מחרימים אותך. התקציב השבועי נכשל בגללך, ואחד הדיירים ניגש אליך באיום פיזי במטבח.",
+      "options": [
+        {
+          "label": "לחצות את הקו: לשבור כוס בעצבים ולהחזיר לו באלימות אגרסיבית.",
+          "targetNode": "node_end_ejected",
+          "overlay_image": "סירנה_אדומה.png",
+          "stateModifiers": {
+            "popularity": -50,
+            "alliances": -50,
+            "sanity": -40
+          }
+        },
+        {
+          "label": "להוריד פרופיל: להתנצל בפני הבית, לנקות את המטבח ולנסות לתקן את התדמית.",
+          "targetNode": "node_end_voted_out",
+          "overlay_image": "מטאטא_עץ.png",
+          "stateModifiers": {
+            "popularity": -20,
+            "alliances": 10,
+            "sanity": -5
+          }
+        }
+      ],
+      "background": "assets/bg/bg_villain_2way.jpg"
+    },
+    "node_victim_path": {
+      "id": "node_victim_path",
+      "title": "אהבת הקהל",
+      "description": "הדמעות עבדו. הקהל בבית מרחם עליך והפכת לפייבוריט, אבל הלחץ הנפשי לשמור על תדמית 'המסכן' מול המצלמות 24/7 ממוטט אותך.",
+      "options": [
+        {
+          "label": "להישבר סופית: לארוז את המזוודה ולעזוב את הווילה מרצונך החופשי.",
+          "targetNode": "node_end_self_eviction",
+          "overlay_image": "מזוודה.png",
+          "stateModifiers": {
+            "popularity": 10,
+            "alliances": -10,
+            "sanity": 30
+          }
+        },
+        {
+          "label": "המאסטרמיינד: לחשוף במונולוג למצלמה בלילה שכל הבכי היה אסטרטגיה מחושבת לגמר.",
+          "targetNode": "node_end_mastermind_win",
+          "overlay_image": "עין_מצלמה.png",
+          "stateModifiers": {
+            "popularity": 30,
+            "alliances": -20,
+            "sanity": -10
+          }
+        }
+      ],
+      "background": "assets/bg/bg_victim_2way.jpg"
+    },
+    "node_end_winner_hated": {
+      "id": "node_end_winner_hated",
+      "title": "סיום: המיליונר הבודד",
+      "description": "בגדת בכולם, ניצחת במשחק ולקחת את המיליון. אבל הקהל בחוץ שונא אותך, אף דייר לא מדבר איתך, וקמפיינים בורחים ממך כמו מאש. לפחות יש לך את הכסף.",
+      "options": [],
+      "background": "assets/bg/bg_end_winner.jpg"
+    },
+    "node_end_runner_up": {
+      "id": "node_end_runner_up",
+      "title": "סיום: מאמי לאומי",
+      "description": "הגעת למקום השני, אבל יצאת כמנצח האמיתי של העונה. הכנות שלך קנתה את לב הקהל, ויצאת לחיים האמיתיים עם חוזה טאלנט וקמפיין אופנה ארצי.",
+      "options": [],
+      "background": "assets/bg/bg_end_runner.jpg"
+    },
+    "node_end_ejected": {
+      "id": "node_end_ejected",
+      "title": "סיום: סילוק בבושת פנים",
+      "description": "חצית את גבולות הפורמט. האח הגדול קרא לך לחדר והודיע על סילוק מיידי מהתוכנית עקב אלימות. יצאת מדלת צדדית בלי קהל ובלי תהילה.",
+      "options": [],
+      "background": "assets/bg/bg_end_ejected.jpg"
+    },
+    "node_end_voted_out": {
+      "id": "node_end_voted_out",
+      "title": "סיום: הדחה משעממת",
+      "description": "הניסיון להתנצל ולהיות בסדר עם כולם הפך אותך לדמות משעממת. הקהל איבד עניין והודחת רגע לפני שבוע הגמר. בקרוב כולם ישכחו שהיית שם.",
+      "options": [],
+      "background": "assets/bg/bg_end_voted.jpg"
+    },
+    "node_end_self_eviction": {
+      "id": "node_end_self_eviction",
+      "title": "סיום: הבריאות קודמת",
+      "description": "עזבת את הווילה מרצונך. ויתרת על הפרס, אבל הצלת את השפיות שלך. הקהל העריך את האומץ לשים גבולות, וחזרת לאנונימיות מבורכת ושלווה.",
+      "options": [],
+      "background": "assets/bg/bg_end_self.jpg"
+    },
+    "node_end_mastermind_win": {
+      "id": "node_end_mastermind_win",
+      "title": "סיום: הגאון הטלוויזיוני",
+      "description": "ניגנת על המערכת כמו פסנתר. הקהל העריך את הגאונות האסטרטגית שלך והצביע לך בהמוניו. יצאת אחרון מהבית, עם המיליון ועם תואר השחקן הטוב ביותר בתולדות הפורמט.",
+      "options": [],
+      "background": "assets/bg/bg_end_mastermind.jpg"
+    }
+  }
+}
